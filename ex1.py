@@ -11,8 +11,8 @@ from datasets import load_dataset
 from dataclasses import dataclass, field
 from evaluate import load
 
-wandb.login(key='94ee7285d2d25226f2c969e28645475f9adffbce')
-logger = logging.getLogger(__name__)
+# wandb.login(key='94ee7285d2d25226f2c969e28645475f9adffbce')
+# logger = logging.getLogger(__name__)
 
 
 def preprocess_function(data):
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     for model_name in models:
         metric = load('accuracy')
         training_args.save_strategy = 'no'
-        training_args.report_to = ["wandb"]
+        # training_args.report_to = ["wandb"]
 
         for seed in range(my_args.n_seeds):
             set_seed(seed)
@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
             results = pd.concat([results, pd.DataFrame([model_data])], ignore_index=True)
             # finish reporting to wandb
-            wandb.finish()
+            # wandb.finish()
             # print(f'\n~~~~~~~~~~ FINISH TRAIN ON {model_name}, seed = {seed}, acc = {metrics["eval_accuracy"]} ~~~~~~~~~~\n')
 
         # model_acc = results.loc['model_name']['accuracy'].to_numpy()
